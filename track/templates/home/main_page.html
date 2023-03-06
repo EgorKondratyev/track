@@ -1,5 +1,267 @@
-{% extends 'home/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
 
-{% block header %}
-    <h1>{{title}}</h1>
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header__body body">
+            <div class="header__column">
+                <a class="header__link" href="#pricing">Pricing</a>
+                <a class="header__link" href="#delivery">Delivery</a>
+                <a class="header__link" href="">Link</a>
+                <a class="header__link" href="">Link</a>
+            </div>
+            <div class="header__logo">Getmoretraks.com</div>
+            <div class="header__column">
+                <a class="header__link" href="{% url 'account_login' %}">Log in/Sign up</a>
+                <a class="header__link" href="">Contacts</a>
+            </div>
+            <div class="header__burger">
+                <span></span>
+            </div>
+            <div class="header__menu">
+                <a class="header__link" href="#pricing">Pricing</a>
+                <a class="header__link" href="#delivery">Delivery</a>
+                <a class="header__link" href="">Link</a>
+                <a class="header__link" href="">Link</a>
+                <a class="header__link" href="{% url 'account_login' %}">Log in/Sign up</a>
+                <a class="header__link" href="">Contacts</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="about">
+        <div class="about__body body">
+            <div class="about__column">
+                <div class="about__text">
+                    <div class="text__title">
+                        Premium Global Package Tracking For e-Commerce business
+                    </div>
+                    <div class="text__body">
+                        Track packages from China, USPS, Canada Post, Royal Mail, Deutsche Post, LBC, Aliexpress, UPS,
+                        Shein, FedEx, Pitney Bowes, eBay, Amazon
+                    </div>
+                    <div class="text__btn">
+                        <a class="btn" href="/">Download</a>
+                    </div>
+                </div>
+            </div>
+            <div class="about__column">
+                <div class="about__img">
+                    <img src="{% static 'home/image/telephones.png' %}" alt="telephones">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing" id="pricing">
+        <div class="pricing__body body">
+            <div class="pricing__title title">
+                Pricing
+                <div class="pricing__subtitle subtitle">
+                    Choose the plan the best for you
+                </div>
+            </div>
+            <div class="pricing__cards">
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $0 for 5 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 5 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $9.99 per month for 50 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 50 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $29.99 for 200 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 200 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $49.99 for 500 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 500 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $79.99 for 1000 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 1000 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $109.99 for 3000 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 3000 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $159.99 for 5000 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 5 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            $199.99 for 10000 tracks
+                        </div>
+                        <div class="item__text">
+                            <p>Track up to 50 parcels per month</p>
+                            <p>Including 700+ carriers</p>
+                            <p>Check on our website</p>
+                            <p>Integrate with your website</p>
+                            <p>Premium support by phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing__column">
+                    <div class="pricing__item">
+                        <div class="item__title">
+                            <p>Need a bigger plan?</p>
+                            <p>Please contact us</p>
+                        </div>
+                        <div class="item__text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="delivery" id="delivery">
+        <div class="delivery__body body">
+            <div class="delivery__title title">
+                Delivery
+                <div class="delivery__subtitle subtitle">
+                    Find poy where is your track now
+                </div>
+            </div>
+            <form id="delivery" action="#" class="delivery-form">
+                <div class="delivery-form__forms">
+                    <div class="delivery-form__carrier delivery-form__item">
+                        <div class="carrier__header delivery-item__header">
+                            Carrier
+                        </div>
+                        <div class="carrier__content delivery-item__content">
+                            <select class="select" name="" id="" form="delivery">
+                                <option value="">Amazon</option>
+                                <option value="">Fnac</option>
+                                <option value="">eBay</option>
+                                <option value="">Fruugo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="delivery-form__number delivery-form__item">
+                        <div class="number__header delivery-item__header">
+                            Identification number
+                        </div>
+                        <div class="number__content delivery-item__content">
+                            <input class="input" type="number" placeholder="Enter number">
+                        </div>
+                    </div>
+                </div>
+                <div class="delivery-form__btn">
+                    <a class="btn" href="/">Find my Track</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__body body">
+            <div class="footer__item">
+                Lorem
+            </div>
+            <div class="footer__item">
+                Lorem
+            </div>
+            <div class="footer__item">
+                Lorem
+            </div>
+            <div class="footer__item">
+                Lorem
+            </div>
+            <div class="footer__item">
+                Lorem
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+        integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="{% static 'home/js/script.js' %}"></script>
+</body>
+
+</html>
