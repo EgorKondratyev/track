@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="keywords" content="track, track24, parcel, tracking parcel">
+    <meta name="description" content="Parcel tracking 24 hours">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <ul>
+        {% if not request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'account_signup' %}">Регистрация</a>
+            </li>
+            <li>
+                <a href="{% url 'account_login' %}">Вход</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'account_change_password' %}">Сменить пароль</a>
+            </li>
+            <li>
+                <a href="{% url 'account_logout' %}">Выход</a>
+            </li>
+        {% endif %}
+    </ul>
+  {% block header %}{% endblock %}
+  {% block content %}{% endblock %}
+  {% block footer %}{% endblock %}
+</body>
+</html>

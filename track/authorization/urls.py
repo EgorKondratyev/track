@@ -1,0 +1,66 @@
+from django.urls import path, re_path
+
+from authorization import views
+
+urlpatterns = [
+    path(
+        r"login/",
+        views.UserLoginView.as_view(),
+        name="account_login"
+    ),
+    path(
+        r"signup/",
+        views.UserSignupView.as_view(),
+        name="account_signup"
+    ),
+    path(
+        'password/change/',
+        views.UserPasswordChangeView.as_view(),
+        name='account_change_password'
+    ),
+    path(
+        'logout/',
+        views.UserLogoutView.as_view(),
+        name='account_logout'
+    ),
+    path(
+        'password_change_done/',
+        views.UserPasswordChangeDoneView.as_view(),
+        name='password_change_done'
+    ),
+    path(
+        'confirm-email/',
+        views.UserEmailVerificationSentView.as_view(),
+        name='account_email_verification_sent'
+    ),
+    re_path(
+        r"^confirm-email/(?P<key>[-:\w]+)/$",
+        views.UserEmailConfirmationView.as_view(),
+        name="account_confirm_email",
+    ),
+    path(
+        'password/reset/',
+        views.UserPasswordResetView.as_view(),
+        name='account_reset_password'
+    ),
+    path(
+        "password/reset/done/",
+        views.UserPasswordResetDoneView.as_view(),
+        name="account_reset_password_done",
+    ),
+    re_path(
+        r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
+        views.UserPasswordResetFromKeyView.as_view(),
+        name="account_reset_password_from_key",
+    ),
+    path(
+        "password/reset/key/done/",
+        views.UserPasswordResetFromKeyDoneView.as_view(),
+        name="account_reset_password_from_key_done",
+    ),
+    path(
+        'email/',
+        views.UserEmailView.as_view(),
+        name='account_email'
+    )
+]
