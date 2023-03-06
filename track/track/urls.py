@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from track.settings import DEBUG, STATIC_URL, STATIC_ROOT
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
@@ -27,4 +28,3 @@ urlpatterns = [
 
 if DEBUG:
     urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT)
-
