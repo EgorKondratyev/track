@@ -7,5 +7,5 @@ class CustomLoginForm(LoginForm):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
         self.fields['password'].widget.attrs.update({'class': 'special'})
         self.fields['login'].widget.attrs.update({'class': 'special'})
-        self.fields['remember'].widget.attrs.update({'class': 'special'})
+        self.fields['remember'].widget.attrs.update({'class': 'input-checkbox'})
         self.fields['captcha'] = CaptchaField()
