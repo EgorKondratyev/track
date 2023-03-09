@@ -143,6 +143,15 @@ html {
   background: linear-gradient(to left, #121212, #ffffff);
 }
 
+.subtitle {
+  color: #121212;
+  position: relative;
+  margin: 0px 0px 1em 0px;
+  font-size: 1.5em;
+  font-weight: 500;
+  text-align: center;
+}
+
 .note {
   font-size: 1em;
   font-weight: 300;
@@ -270,6 +279,32 @@ html {
 
 .mail__title::before, .mail__title::after {
   width: 15%;
+}
+.mail__mail {
+  text-align: center;
+  margin: 0px 0px 1.5em 0px;
+}
+
+.buttonHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 0.5em;
+}
+.buttonHolder button {
+  background-color: #76b93f;
+  color: #ffffff;
+  margin: 0px 0px 1.5em 0px;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  border-radius: 0.5em;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.buttonHolder button:hover {
+  border-radius: 1.5em;
 }
 
 .confirm-mail__title::before, .confirm-mail__title::after {
