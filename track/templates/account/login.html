@@ -44,13 +44,29 @@
     
     {{form.non_field_errors}}
 
-    {% for element_form in form %}
     <div class="login__data data">
-        <label for="{{element_form.id_for_label}}">{{element_form.label}}</label>
-        {{element_form}}
+        <label for="{{form.login.id_for_label}}">{{form.login.label}}</label>
+        {{form.login}}
     </div>
-    <div>{{ element_form.errors }}</div>
-    {% endfor %}
+    <div>{{ form.login.errors }}</div>
+
+    <div class="login__data data">
+        <label for="{{form.password.id_for_label}}">{{form.password.label}}</label>
+        {{form.password}}
+    </div>
+    <div>{{ form.password.errors }}</div>
+
+    <div class="login__data data">
+        <label for="{{form.captcha.id_for_label}}">{{form.captcha.label}}</label>
+        {{form.captcha}}
+    </div>
+    <div>{{ form.captcha.errors }}</div>
+
+    <div class="login__data data">
+        <label for="{{form.remember.id_for_label}}">{{form.remember.label}}</label>
+        {{form.remember}}
+    </div>
+    <div>{{ form.remember.errors }}</div>
 
     {% if redirect_field_value %}
     <input class="input" type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
