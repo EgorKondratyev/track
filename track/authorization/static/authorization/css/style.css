@@ -91,6 +91,13 @@ h6 {
 }
 
 /*--------------------*/
+@media (max-width: 500px) {
+  html,
+body {
+    font-size: 10px;
+  }
+}
+
 html {
   background-color: #efefef;
 }

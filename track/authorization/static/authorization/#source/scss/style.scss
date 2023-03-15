@@ -5,6 +5,13 @@ $color_2: #ffffff;
 $color_3: #efefef;
 $color_4: #76b93f;
 
+html,
+body {
+    @media (max-width: 500px) {
+        font-size: 10px;
+    }
+}
+
 html {
     background-color: $color_3;
 }
@@ -217,7 +224,7 @@ html {
     display: flex;
     justify-content: space-around;
     padding: 0.5em;
-    
+
     button {
         background-color: $color_4;
         color: $color_2;
