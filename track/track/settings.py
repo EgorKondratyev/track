@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.urls import reverse_lazy
+
 from track import local_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -143,8 +146,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AUTH
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = reverse_lazy('track_search')
+LOGIN_URL = reverse_lazy('track_search')
 
 # CONFIG Allauth
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
