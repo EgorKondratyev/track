@@ -21,7 +21,13 @@
                 <a class="header__link" href="">Link</a>
                 <a class="header__link" href="">Link</a>
             </div>
-            <div class="header__logo">Getmoretraks.com</div>
+            <div class="header__logo">
+                {% if not user.is_authenticated %}
+                    Getmoretraks.com
+                {% else %}
+                    <a href="{% url 'track_search' %}">Getmoretraks.com</a>
+                {% endif %}
+            </div>
             <div class="header__column">
                 {% if not user.is_authenticated %}
                     <a class="header__link" href="{% url 'account_login' %}">Log in/Sign up</a>
