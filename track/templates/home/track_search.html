@@ -16,23 +16,24 @@
     <div class="header">
         <div class="header__body body">
             <div class="header__column">
-                <a class="header__link" href="">Search <i class="fa fa-search"></i></a>
+                <a class="header__link" href="{% url 'track_search' %}">Search <i class="fa fa-search"></i></a>
+                <a class="header__link" href="{% url 'track_search' %}">My track <i class="fa fa-search"></i></a>
                 <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i class="fa fa-unlock"></i></a>
             </div>
             <div class="header__logo">
                 <a href="{% url 'main_page' %}">Getmoretraks.com</a>
             </div>
             <div class="header__column">
-                <a class="header__link" href="">Buy a Plan <i class="fa fa-credit-card"></i></a>
+                <a class="header__link" href="{% url 'payment' %}">Buy a Plan <i class="fa fa-credit-card"></i></a>
                 <a class="header__link header__link_none" href="">Track Balance: 11 <i class="fa fa-calculator"></i></a>
             </div>
             <div class="header__burger">
                 <span></span>
             </div>
             <div class="header__menu">
-                <a class="header__link" href="">Search <i class="fa fa-search"></i></a>
-                <a class="header__link" href="">Change Password <i class="fa fa-unlock"></i></a>
-                <a class="header__link" href="">Buy a Plan <i class="fa fa-credit-card"></i></a>
+                <a class="header__link" href="{% url 'track_search' %}">Search <i class="fa fa-search"></i></a>
+                <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i class="fa fa-unlock"></i></a>
+                <a class="header__link" href="{% url 'payment' %}">Buy a Plan <i class="fa fa-credit-card"></i></a>
                 <a class="header__link header__link_none" href="">Track Balance: 11 <i class="fa fa-calculator"></i></a>
             </div>
         </div>
@@ -40,113 +41,26 @@
 
     <div class="form">
         <div class="form__body">
-            <form id="tracks" action="#" class="delivery-form">
-
+            <form id="tracks" class="delivery-form" action="{% url 'track_search' %}" method="post">
+                {% csrf_token %}
                 <div class="delivery-form__item">
-                    <div class="delivery-form__header">
-                        Country
-                    </div>
+                    <div class="delivery-form__header">Shipped from, date</div>
                     <div class="delivery-form__body">
-                        <select class="select" name="" id="" form="tracks">
-                            <option value="">USA</option>
-                            <option value="">UK</option>
-                            <option value="">Canada</option>
-                            <option value="">Brazil</option>
-                            <option value="">Mexico</option>
-                        </select>
+                        {{ form.shipped_from }}
                     </div>
                 </div>
 
                 <div class="delivery-form__item">
-                    <div class="delivery-form__header">
-                        States
-                    </div>
+                    <div class="delivery-form__header">Shipped to, date</div>
                     <div class="delivery-form__body">
-                        <select class="select" name="" id="" form="tracks">
-                            <option value="">California</option>
-                            <option value="">Florida</option>
-                            <option value="">Colorado</option>
-                            <option value="">Connecticut</option>
-                            <option value="">Delaware</option>
-                        </select>
+                        {{ form.shipped_to }}
                     </div>
                 </div>
-
-                <div class="delivery-form__item">
-                    <div class="delivery-form__header">Sending data</div>
-                    <div class="delivery-form__body">
-                        <input class="delivery-form__input" type="date" id="" name="" value="2023-02-23" form="tracks">
-                    </div>
-                </div>
-
-                <div class="delivery-form__item">
-                    <div class="delivery-form__header">Deliver data</div>
-                    <div class="delivery-form__body">
-                        <input class="delivery-form__input" type="date" id="" name="" value="2023-02-23" form="tracks">
-                    </div>
-                </div>
-
-                <div class="delivery-form__item">
-                    <div class="delivery-form__header">Provider</div>
-                    <div class="delivery-form__body">
-                        <select class="select" name="" id="" form="tracks">
-                            <option value="">Amazon</option>
-                            <option value="">Fnac</option>
-                            <option value="">eBay</option>
-                            <option value="">Fruugo</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="delivery-form__item">
-                    <div class="delivery-form__body">
-                        <input type="checkbox" class="additionally__btn">More Filters
-                    </div>
-                </div>
-
-                <div class="delivery-form__item additionally__item">
-                    <div class="delivery-form__header">Earliest shipped date</div>
-                    <div class="delivery-form__body">
-                        <input class="delivery-form__input" type="date" id="" name="" value="2023-02-23" form="tracks">
-                    </div>
-                </div>
-
-                <div class="delivery-form__item additionally__item">
-                    <div class="delivery-form__header">Departure point</div>
-                    <div class="delivery-form__body">
-                        <div class="delivery-form__body">
-                            <select class="select" name="" id="" form="tracks">
-                                <option value="">New York City</option>
-                                <option value="">Los Angeles</option>
-                                <option value="">Chicago</option>
-                                <option value="">Houston</option>
-                                <option value="">Philadelphia</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="delivery-form__item additionally__item">
-                    <div class="delivery-form__header">Max weight</div>
-                    <div class="delivery-form__body">
-                        <input class="delivery-form__input" type="nuber" placeholder="Enter minimum weight">
-                    </div>
-                </div>
-
-                <div class="delivery-form__item additionally__item">
-                    <div class="delivery-form__header">Min weight</div>
-                    <div class="delivery-form__body">
-                        <input class="delivery-form__input" type="nuber" placeholder="Enter maximum weight">
-                    </div>
-                </div>
+                <p><button type="submit">Filter</button></p>
 
             </form>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
 
 </body>
 
