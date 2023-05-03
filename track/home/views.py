@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from home.forms import TrackSearchForm
+from home.utils import get_tracks
 
 
 def main_page(request):
@@ -11,16 +12,32 @@ def main_page(request):
 
 
 def track_search(request):
+    tracks = None
     if request.POST:
         form = TrackSearchForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            shipped_to, shipped_from, state, senders_zip = form.cleaned_data['shipped_to'], \
+                                                           form.cleaned_data['shipped_from'], \
+                                                           form.cleaned_data['state'], \
+                                                           form.cleaned_data['senders_zip']
+            if state and senders_zip:
+                pass
+            elif state:
+                pass
+            elif senders_zip:
+                pass
+            else:
+                print(shipped_from, shipped_to)
+                tracks = get_tracks(shipped_from=shipped_from,
+                                    shipped_to=shipped_to)
     else:
         form = TrackSearchForm()
-    print(form)
+
+    print(tracks)
     context = {
         'title': 'My track',
-        'form': form
+        'form': form,
+        'tracks': tracks
     }
     return render(request, 'home/track_search.html', context)
 
