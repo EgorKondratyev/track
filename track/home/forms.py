@@ -30,3 +30,10 @@ class TrackSearchForm(forms.Form):
         min_value=0,
         widget=forms.NumberInput(attrs={'class': 'delivery-form__input'})
     )
+
+
+class TrackSaveForm(forms.Form):
+    shipped_from = forms.DateField(widget=forms.HiddenInput())
+    shipped_to = forms.DateField(widget=forms.HiddenInput())
+    state = forms.CharField(widget=forms.HiddenInput())
+    senders_zip = forms.IntegerField(widget=forms.HiddenInput())

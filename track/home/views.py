@@ -15,6 +15,7 @@ def track_search(request):
     tracks = None
     if request.POST:
         form = TrackSearchForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             shipped_to, shipped_from, state, senders_zip = form.cleaned_data['shipped_to'], \
                                                            form.cleaned_data['shipped_from'], \

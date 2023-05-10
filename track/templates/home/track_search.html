@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,30 +88,34 @@
         </div>
     </div>
     {% if tracks %}
-        <table width="500">
-            <tr>
-                <th>Copy</th>
-                <th>Tracking</th>
-                <th>Service</th>
-                <th>Label created</th>
-                <th>Shipped</th>
-                <th>Shipped from</th>
-                <th>Shipped zip</th>
-                <th>Status</th>
-            </tr>
-            {% for track in tracks %}
+            <table width="500">
                 <tr>
-                    <td><button onclick="myFunction('{{ track.tracking }}')">Copy!</button></td>
-                    <td><input id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}" readonly/></td>
-                    <td>{{ track.product }}</td>
-                    <td>{{ track.created }}</td>
-                    <td>{{ track.shipped }}</td>
-                    <td>{{ track.shipped_from }}</td>
-                    <td>{{ track.shipped_zip }}</td>
-                    <td>{{ track.status }}</td>
+                    <th>Copy</th>
+                    <th>Tracking</th>
+                    <th>Service</th>
+                    <th>Label created</th>
+                    <th>Shipped</th>
+                    <th>Shipped from</th>
+                    <th>Shipped zip</th>
+                    <th>Status</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for track in tracks %}
+                    <form method="post" action="{% url 'track_search' %}">
+                        {% csrf_token %}
+                        <tr>
+                            <td><button onclick="myFunction('{{ track.tracking }}')">Copy!</button></td>
+                            <input type="hidden" name="track_id" value="{{ track.tracking }}"/>
+                            <td><input type="text" id="track_copy_{{ track.tracking }}" value="{{ track.tracking|hidden_track }}" readonly/></td>
+                            <td>{{ track.product }}</td>
+                            <td>{{ track.created }}</td>
+                            <td>{{ track.shipped }}</td>
+                            <td>{{ track.shipped_from }}</td>
+                            <td>{{ track.shipped_zip }}</td>
+                            <td>{{ track.status }}</td>
+                        </tr>
+                    </form>
+                {% endfor %}
+            </table>
     {% else %}
         <p>We apologize, but not a single track was found for your request</p>
     {% endif %}
