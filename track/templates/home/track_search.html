@@ -100,8 +100,8 @@
             </tr>
             {% for track in tracks %}
                 <tr>
-                    <td>Copy!</td>
-                    <td>{{ track.tracking }}</td>
+                    <td><button onclick="myFunction('{{ track.tracking }}')">Copy!</button></td>
+                    <td><input id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}" readonly/></td>
                     <td>{{ track.product }}</td>
                     <td>{{ track.created }}</td>
                     <td>{{ track.shipped }}</td>
@@ -114,6 +114,15 @@
     {% else %}
         <p>We apologize, but not a single track was found for your request</p>
     {% endif %}
+
+    <script>
+        function myFunction(track) {
+            var copyText = document.getElementById("track_copy_" + track);
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied the track: " + copyText.value);
+        }
+</script>
 </body>
 
 </html>

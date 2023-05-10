@@ -33,7 +33,6 @@ def track_search(request):
     else:
         form = TrackSearchForm()
 
-    print(tracks)
     context = {
         'title': 'My track',
         'form': form,
