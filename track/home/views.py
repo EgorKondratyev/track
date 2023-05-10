@@ -13,6 +13,10 @@ def main_page(request):
 
 def track_search(request):
     tracks = None
+    shipped_to = None
+    shipped_from = None
+    state = None
+    senders_zip = 0
     if request.POST:
         form = TrackSearchForm(request.POST)
         print(request.POST)
@@ -28,7 +32,6 @@ def track_search(request):
             elif senders_zip:
                 pass
             else:
-                print(shipped_from, shipped_to)
                 tracks = get_tracks(shipped_from=shipped_from,
                                     shipped_to=shipped_to)
     else:
@@ -37,7 +40,11 @@ def track_search(request):
     context = {
         'title': 'My track',
         'form': form,
-        'tracks': tracks
+        'tracks': tracks,
+        'shipped_to': str(shipped_to),
+        'shipped_from': str(shipped_from),
+        'state': state,
+        'senders_zip': senders_zip if senders_zip else 0
     }
     return render(request, 'home/track_search.html', context)
 

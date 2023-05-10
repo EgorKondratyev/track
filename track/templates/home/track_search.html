@@ -103,9 +103,8 @@
                     <form method="post" action="{% url 'track_search' %}">
                         {% csrf_token %}
                         <tr>
-                            <td><button onclick="myFunction('{{ track.tracking }}')">Copy!</button></td>
-                            <input type="hidden" name="track_id" value="{{ track.tracking }}"/>
-                            <td><input type="text" id="track_copy_{{ track.tracking }}" value="{{ track.tracking|hidden_track }}" readonly/></td>
+                            <td><button onclick="copy_track('{{ track.tracking }}')">Copy!</button></td>
+                            <td><input type="text" id="track_copy_{{ track.tracking }}" value="{{ track.tracking|hidden_track }}" name="track_id"/></td>
                             <td>{{ track.product }}</td>
                             <td>{{ track.created }}</td>
                             <td>{{ track.shipped }}</td>
@@ -113,6 +112,10 @@
                             <td>{{ track.shipped_zip }}</td>
                             <td>{{ track.status }}</td>
                         </tr>
+                        <input type="hidden" name="shipped_to" value="{{ shipped_to }}"/>
+                        <input type="hidden" name="shipped_from" value="{{ shipped_from }}"/>
+                        <input type="hidden" name="state" value="{{ state }}"/>
+                        <input type="hidden" name="senders_zip" value="{{ senders_zip }}"/>
                     </form>
                 {% endfor %}
             </table>
@@ -121,11 +124,12 @@
     {% endif %}
 
     <script>
-        function myFunction(track) {
-            var copyText = document.getElementById("track_copy_" + track);
-            copyText.select();
-            document.execCommand("copy");
-            alert("Copied the track: " + copyText.value);
+        function copy_track(track) {
+            navigator.clipboard.writeText(track).then(function () {
+                console.log('Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Could not copy text: ', err);
+            });
         }
 </script>
 </body>

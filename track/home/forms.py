@@ -28,6 +28,7 @@ class TrackSearchForm(forms.Form):
         label="Sender's ZIP",
         required=False,
         min_value=0,
+        initial=0,
         widget=forms.NumberInput(attrs={'class': 'delivery-form__input'})
     )
 
