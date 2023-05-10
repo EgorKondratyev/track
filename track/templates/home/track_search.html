@@ -103,8 +103,14 @@
                     <form method="post" action="{% url 'track_search' %}">
                         {% csrf_token %}
                         <tr>
-                            <td><button onclick="copy_track('{{ track.tracking }}')">Copy!</button></td>
-                            <td><input type="text" id="track_copy_{{ track.tracking }}" value="{{ track.tracking|hidden_track }}" name="track_id"/></td>
+                            {% if track_id == track.tracking %}
+                                <td>Copied!</td>
+                                <td>{{ track.tracking }}</td>
+                            {% else %}
+                                <td><button onclick="copy_track('{{ track.tracking }}')">Copy!</button></td>
+                                <input type="hidden" id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}" name="track_id"/>
+                                <td>{{ track.tracking|hidden_track }}</td>
+                            {% endif %}
                             <td>{{ track.product }}</td>
                             <td>{{ track.created }}</td>
                             <td>{{ track.shipped }}</td>
