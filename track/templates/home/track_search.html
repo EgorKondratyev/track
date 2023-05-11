@@ -10,16 +10,6 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'home/css/track_search.css' %}">
-    <style type="text/css">
-   TABLE {
-    background: #dc0; /* Цвет фона таблицы */
-    border: 5px double #000; /* Рамка вокруг таблицы */
-   }
-   TD, TH {
-    padding: 5px; /* Поля вокруг текста */
-    border: 1px solid #fff; /* Рамка вокруг ячеек */
-   }
-  </style>
 </head>
 
 <body>
@@ -29,7 +19,8 @@
             <div class="header__column">
                 <a class="header__link" href="{% url 'track_search' %}">Search <i class="fa fa-search"></i></a>
                 <a class="header__link" href="{% url 'track_search' %}">My track <i class="fa fa-search"></i></a>
-                <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i class="fa fa-unlock"></i></a>
+                <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i
+                        class="fa fa-unlock"></i></a>
             </div>
             <div class="header__logo">
                 <a href="{% url 'main_page' %}">Getmoretraks.com</a>
@@ -43,7 +34,8 @@
             </div>
             <div class="header__menu">
                 <a class="header__link" href="{% url 'track_search' %}">Search <i class="fa fa-search"></i></a>
-                <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i class="fa fa-unlock"></i></a>
+                <a class="header__link" href="{% url 'account_change_password' %}">Change Password <i
+                        class="fa fa-unlock"></i></a>
                 <a class="header__link" href="{% url 'payment' %}">Buy a Plan <i class="fa fa-credit-card"></i></a>
                 <a class="header__link header__link_none" href="">Track Balance: 11 <i class="fa fa-calculator"></i></a>
             </div>
@@ -88,45 +80,47 @@
         </div>
     </div>
     {% if tracks %}
-            <table width="500">
-                <tr>
-                    <th>Copy</th>
-                    <th>Tracking</th>
-                    <th>Service</th>
-                    <th>Label created</th>
-                    <th>Shipped</th>
-                    <th>Shipped from</th>
-                    <th>Shipped zip</th>
-                    <th>Status</th>
-                </tr>
-                {% for track in tracks %}
-                    <form method="post" action="{% url 'track_search' %}">
-                        {% csrf_token %}
-                        <tr>
-                            {% if track_id == track.tracking %}
-                                <td>Copied!</td>
-                                <td>{{ track.tracking }}</td>
-                            {% else %}
-                                <td><button onclick="copy_track('{{ track.tracking }}')">Copy!</button></td>
-                                <input type="hidden" id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}" name="track_id"/>
-                                <td>{{ track.tracking|hidden_track }}</td>
-                            {% endif %}
-                            <td>{{ track.product }}</td>
-                            <td>{{ track.created }}</td>
-                            <td>{{ track.shipped }}</td>
-                            <td>{{ track.shipped_from }}</td>
-                            <td>{{ track.shipped_zip }}</td>
-                            <td>{{ track.status }}</td>
-                        </tr>
-                        <input type="hidden" name="shipped_to" value="{{ shipped_to }}"/>
-                        <input type="hidden" name="shipped_from" value="{{ shipped_from }}"/>
-                        <input type="hidden" name="state" value="{{ state }}"/>
-                        <input type="hidden" name="senders_zip" value="{{ senders_zip }}"/>
-                    </form>
-                {% endfor %}
-            </table>
+    <div class="table">
+        <div class="table__header">
+            <div class="table__header-item">Copy</div>
+            <div class="table__header-item">Tracking</div>
+            <div class="table__header-item">Service</div>
+            <div class="table__header-item">Label created</div>
+            <div class="table__header-item">Shipped</div>
+            <div class="table__header-item">Shipped from</div>
+            <div class="table__header-item">Shipped zip</div>
+            <div class="table__header-item">Status</div>
+        </div>
+
+        {% for track in tracks %}
+        <form method="post" action="{% url 'track_search' %}">
+            {% csrf_token %}
+            <div class="table__row">
+                {% if track_id == track.tracking %}
+                <div class="table__row-item">Copied!</div>
+                <div class="table__row-item">{{ track.tracking }}</div>
+                {% else %}
+                <div class="table__row-item"><button class="table__btn btn" onclick="copy_track('{{ track.tracking }}')">Copy!</button></div>
+                <input type="hidden" id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}"
+                    name="track_id" />
+                <div class="table__row-item">{{ track.tracking|hidden_track }}</div>
+                {% endif %}
+                <div class="table__row-item">{{ track.product }}</div>
+                <div class="table__row-item">{{ track.created }}</div>
+                <div class="table__row-item">{{ track.shipped }}</div>
+                <div class="table__row-item">{{ track.shipped_from }}</div>
+                <div class="table__row-item">{{ track.shipped_zip }}</div>
+                <div class="table__row-item">{{ track.status }}</div>
+            </div>
+            <input type="hidden" name="shipped_to" value="{{ shipped_to }}" />
+            <input type="hidden" name="shipped_from" value="{{ shipped_from }}" />
+            <input type="hidden" name="state" value="{{ state }}" />
+            <input type="hidden" name="senders_zip" value="{{ senders_zip }}" />
+        </form>
+        {% endfor %}
+    </div>
     {% else %}
-        <p>We apologize, but not a single track was found for your request</p>
+    <p>We apologize, but not a single track was found for your request</p>
     {% endif %}
 
     <script>
@@ -137,7 +131,7 @@
                 console.error('Could not copy text: ', err);
             });
         }
-</script>
+    </script>
 </body>
 
 </html>
