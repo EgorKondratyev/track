@@ -92,17 +92,17 @@
             <div class="table__header-item">Status</div>
         </div>
 
-        {% for track in tracks %}
+        {% for track in page_obj %}
         <form method="post" action="{% url 'track_search' %}">
             {% csrf_token %}
             <div class="table__row">
-                {% if track_id == track.tracking %}
+                {% if tracks_copied == track.tracking %}
                 <div class="table__row-item">Copied!</div>
                 <div class="table__row-item">{{ track.tracking }}</div>
                 {% else %}
                 <div class="table__row-item"><button class="table__btn btn" onclick="copy_track('{{ track.tracking }}')">Copy!</button></div>
                 <input type="hidden" id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}"
-                    name="track_id" />
+                    name="tracks_copied" />
                 <div class="table__row-item">{{ track.tracking|hidden_track }}</div>
                 {% endif %}
                 <div class="table__row-item">{{ track.product }}</div>
@@ -119,6 +119,35 @@
         </form>
         {% endfor %}
     </div>
+    {% if page_obj.has_other_pages %}
+        <nav>
+            <ul>
+                {% if page_obj.has_previous %}
+                    <li>
+                        <a href="?page={{ page_obj.previous_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Previous page</a>
+                    </li>
+                {% endif %}
+
+                {% for page_number in paginator.page_range %}
+                    {% if page_number == page_obj.number %}
+                        <li>
+                            {{ page_number }}
+                        </li>
+                    {% elif page_number|add:2 >= page_obj.number and page_number|add:-2 <= page_obj.number %}
+                        <li>
+                            <a href="?page={{ page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li>
+                        <a href="?page={{ page_obj.next_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Next page</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
     {% else %}
     <p>We apologize, but not a single track was found for your request</p>
     {% endif %}

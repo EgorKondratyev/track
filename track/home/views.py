@@ -1,4 +1,6 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 from home.forms import TrackSearchForm
 from home.utils import get_tracks
@@ -13,11 +15,16 @@ def main_page(request):
 
 def track_search(request):
     tracks = None
+    tracks_copied = []
+    # Filters
     shipped_to = None
     shipped_from = None
     state = None
     senders_zip = 0
-    track_id = []
+    # Pagination options
+    paginator = None
+    page_obj = 1
+    
     if request.POST:
         form = TrackSearchForm(request.POST)
         if form.is_valid():
@@ -25,31 +32,46 @@ def track_search(request):
                                                            form.cleaned_data['shipped_from'], \
                                                            form.cleaned_data['state'], \
                                                            form.cleaned_data['senders_zip']
-            track_id = request.POST.get('track_id')
-            print(track_id)
-            if state and senders_zip:
-                pass
-            elif state:
-                pass
-            elif senders_zip:
-                pass
-            else:
-                tracks = get_tracks(shipped_from=shipped_from,
-                                    shipped_to=shipped_to)
+            tracks_copied = request.POST.get('tracks_copied')
+            tracks = get_tracks(shipped_from=shipped_from,
+                                shipped_to=shipped_to,
+                                starting_from=0,
+                                end_before=100,
+                                state=state, senders_zip=senders_zip)
+            paginator = Paginator(tracks, 20)
     else:
         form = TrackSearchForm()
+        if request.GET.get('page'):
+            shipped_from = request.GET.get('shipped_from')
+            shipped_to = request.GET.get('shipped_to')
+            state = request.GET.get('state', None)
+            senders_zip = request.GET.get('senders_zip', 0)
+            tracks = get_tracks(shipped_from=shipped_from,
+                                shipped_to=shipped_to,
+                                starting_from=0,
+                                end_before=100,
+                                state=state, senders_zip=senders_zip)
+            paginator = Paginator(tracks, 20)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
 
-    context = {
+    base_context = {
         'title': 'My track',
         'form': form,
         'tracks': tracks,
+        'tracks_copied': tracks_copied
+    }
+    filter_context = {
         'shipped_to': str(shipped_to),
         'shipped_from': str(shipped_from),
         'state': state,
         'senders_zip': senders_zip if senders_zip else 0,
-        'track_id': track_id
     }
-    return render(request, 'home/track_search.html', context)
+    pagination_context = {
+        'paginator': paginator,
+        'page_obj': page_obj
+    }
+    return render(request, 'home/track_search.html', base_context | filter_context | pagination_context)
 
 
 def payment(request):
