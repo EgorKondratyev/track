@@ -1,4 +1,3 @@
-from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
@@ -21,10 +20,9 @@ def track_search(request):
     shipped_from = None
     state = None
     senders_zip = 0
-    # Pagination options
     paginator = None
-    page_obj = 1
-    
+    page_obj = []
+
     if request.POST:
         form = TrackSearchForm(request.POST)
         if form.is_valid():
@@ -39,6 +37,8 @@ def track_search(request):
                                 end_before=100,
                                 state=state, senders_zip=senders_zip)
             paginator = Paginator(tracks, 20)
+            num_page = request.POST.get('page', 1)
+            page_obj = paginator.get_page(num_page)
     else:
         form = TrackSearchForm()
         if request.GET.get('page'):
