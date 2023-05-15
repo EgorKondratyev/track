@@ -216,6 +216,10 @@ body.lock {
     justify-content: center;
 }
 
+.header__logo a {
+    color: #fff;
+}
+
 @media (max-width: 767px) {
     .header__logo {
         -webkit-box-pack: left;
