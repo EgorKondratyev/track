@@ -74,8 +74,41 @@
                     </div>
                 </div>
 
-                <p><button type="submit">Filter</button></p>
+                <div class="delivery-form__item delivery-form__itemcenter">
+                    <button class="search__btn btn" type="submit">Filter</button>
+                </div>
 
+                <div class="delivery-form__item">
+                    <input class="more__filters-btn" type="checkbox">More Filters</input>
+                </div>
+
+                <div class="delivery-form__item hidden">
+                    <div class="delivery-form__header">State</div>
+                    <div class="delivery-form__body">
+                        {{ form.state }}
+                    </div>
+                </div>
+
+                <div class="delivery-form__item hidden">
+                    <div class="delivery-form__header">State</div>
+                    <div class="delivery-form__body">
+                        {{ form.state }}
+                    </div>
+                </div>
+
+                <div class="delivery-form__item hidden">
+                    <div class="delivery-form__header">State</div>
+                    <div class="delivery-form__body">
+                        {{ form.state }}
+                    </div>
+                </div>
+
+                <div class="delivery-form__item hidden">
+                    <div class="delivery-form__header">State</div>
+                    <div class="delivery-form__body">
+                        {{ form.state }}
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -100,7 +133,8 @@
                 <div class="table__row-item">Copied!</div>
                 <div class="table__row-item">{{ track.tracking }}</div>
                 {% else %}
-                <div class="table__row-item"><button class="table__btn btn" onclick="copy_track('{{ track.tracking }}')">Copy!</button></div>
+                <div class="table__row-item"><button class="table__btn btn"
+                        onclick="copy_track('{{ track.tracking }}')">Copy!</button></div>
                 <input type="hidden" id="track_copy_{{ track.tracking }}" value="{{ track.tracking }}"
                     name="tracks_copied" />
                 <div class="table__row-item">{{ track.tracking|hidden_track }}</div>
@@ -121,36 +155,41 @@
         {% endfor %}
     </div>
     {% if page_obj.has_other_pages %}
-        <nav>
-            <ul>
-                {% if page_obj.has_previous %}
-                    <li>
-                        <a href="?page={{ page_obj.previous_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Previous page</a>
-                    </li>
-                {% endif %}
+    <nav>
+        <ul>
+            {% if page_obj.has_previous %}
+            <li>
+                <a
+                    href="?page={{ page_obj.previous_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Previous
+                    page</a>
+            </li>
+            {% endif %}
 
-                {% for page_number in paginator.page_range %}
-                    {% if page_number == page_obj.number %}
-                        <li>
-                            {{ page_number }}
-                        </li>
-                    {% elif page_number|add:2 >= page_obj.number and page_number|add:-2 <= page_obj.number %}
-                        <li>
-                            <a href="?page={{ page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">{{ page_number }}</a>
-                        </li>
-                    {% endif %}
+            {% for page_number in paginator.page_range %}
+            {% if page_number == page_obj.number %}
+            <li>
+                {{ page_number }}
+            </li>
+            {% elif page_number|add:2 >= page_obj.number and page_number|add:-2 <= page_obj.number %} <li>
+                <a
+                    href="?page={{ page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">{{
+                    page_number }}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <li>
-                        <a href="?page={{ page_obj.next_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Next page</a>
-                    </li>
+                <li>
+                    <a
+                        href="?page={{ page_obj.next_page_number }}&shipped_from={{ shipped_from }}&shipped_to={{ shipped_to }}&state={{ state }}&senders_zip={{ senders_zip }}">Next
+                        page</a>
+                </li>
                 {% endif %}
-            </ul>
-        </nav>
+        </ul>
+    </nav>
     {% endif %}
     {% else %}
-    <p>We apologize, but not a single track was found for your request</p>
+    <div class="apologize">We apologize, but not a single track was found for your request &#128532;</div>
     {% endif %}
 
     <script>
@@ -161,6 +200,16 @@
                 console.error('Could not copy text: ', err);
             });
         }
+    </script>
+    <script>
+        moreFilters = document.querySelector('.more__filters-btn');
+        hiddenFilters = document.querySelectorAll('.hidden');
+
+        moreFilters.addEventListener('click', () => {
+            hiddenFilters.forEach(hiddenFilter => {
+                hiddenFilter.classList.toggle('_active');
+            });
+        });
     </script>
 </body>
 
